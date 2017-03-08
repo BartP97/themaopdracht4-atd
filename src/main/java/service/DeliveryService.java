@@ -47,11 +47,11 @@ public class DeliveryService extends Service<Delivery, Long> {
         q.executeUpdate();
     }
     
-    public void setStatus(Status status, int id) {
-        Query q = getEntityManager().createQuery("UPDATE Delivery SET status = :status WHERE id = :id");
-        q.setParameter("id", id);
-        q.setParameter("status", status);
-        q.executeUpdate();
+    public void boekInIfOrderIsGeleverd(Status status, int id) {
+        Query query = getEntityManager().createQuery("UPDATE Delivery SET status = :status WHERE id = :id");
+        query.setParameter("id", id);
+        query.setParameter("status", status);
+        query.executeUpdate();
         
         if (status.equals(Status.GELEVERD)) {
             Delivery d = (Delivery) find(Long.parseLong(id + ""));

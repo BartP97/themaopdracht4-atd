@@ -130,7 +130,7 @@ public class Person implements Serializable, Validate{
     }
     
     @PrePersist
-    void setActiveCode() {
+    void setActiveCodeIfCustomer() {
         if(role == Role.CUSTOMER){
             
             // als gebruiker een klant is maak dan een activatie code aan

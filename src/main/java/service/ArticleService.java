@@ -24,37 +24,37 @@ public class ArticleService extends Service<Article, Long> {
     }
     
     public List<Article> getArticles(){
-        EntityManager e = getEntityManager();
-        Query q = e.createQuery("SELECT a FROM Article a WHERE a.softDelete = FALSE");
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        Query query = entityManager.createQuery("SELECT a FROM Article a WHERE a.softDelete = FALSE");
+        return query.getResultList();
     }
     
     public void deleteArticle(int id) {
-        Query q = getEntityManager().createQuery("UPDATE Article a SET a.softDelete = TRUE WHERE a.id= :id");
-        q.setParameter("id", id);
-        q.executeUpdate();
+        Query query = getEntityManager().createQuery("UPDATE Article a SET a.softDelete = TRUE WHERE a.id= :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
     
     public List<Article> searchArticle(String name){
-        EntityManager e = getEntityManager();
+        EntityManager entityManager = getEntityManager();
         
-        Query q = e.createQuery("SELECT a FROM Article a WHERE a.name LIKE :search");
-        q.setParameter("search", "%"+name+"%");
+        Query query = entityManager.createQuery("SELECT a FROM Article a WHERE a.name LIKE :search");
+        query.setParameter("search", "%"+name+"%");
         
-        return q.getResultList();
+        return query.getResultList();
     }
     
     public void inboeken(Long id, int count) {
-        Query q = getEntityManager().createQuery("UPDATE Article a SET a.stock = a.stock + :count WHERE a.id= :id");
-        q.setParameter("count", count);
-        q.setParameter("id", id);
-        q.executeUpdate();
+        Query query = getEntityManager().createQuery("UPDATE Article a SET a.stock = a.stock + :count WHERE a.id= :id");
+        query.setParameter("count", count);
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
     
     public void uitboeken(Long id, int count) {
-        Query q = getEntityManager().createQuery("UPDATE Article a SET a.stock = a.stock - :count WHERE a.id= :id");
-        q.setParameter("count", count);
-        q.setParameter("id", id);
-        q.executeUpdate();
+        Query query = getEntityManager().createQuery("UPDATE Article a SET a.stock = a.stock - :count WHERE a.id= :id");
+        query.setParameter("count", count);
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 }

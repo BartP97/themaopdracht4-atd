@@ -8,7 +8,6 @@ package servlet;
 import domain.Delivery;
 import domain.Delivery.Status;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,11 +30,11 @@ public class CMS_Bestelling extends HttpServlet {
         
         if (request.getParameter("id") != null &&  request.getParameter("status") != null) {
             if (request.getParameter("status").equals("1")) {
-                deliverys.setStatus(Status.GELEVERD, Integer.parseInt(request.getParameter("id")));
+                deliverys.boekInIfOrderIsGeleverd(Status.GELEVERD, Integer.parseInt(request.getParameter("id")));
             } else if (request.getParameter("status").equals("2")) {
-                deliverys.setStatus(Status.STANDAARD, Integer.parseInt(request.getParameter("id")));
+                deliverys.boekInIfOrderIsGeleverd(Status.STANDAARD, Integer.parseInt(request.getParameter("id")));
             } else if (request.getParameter("status").equals("3")) {
-                deliverys.setStatus(Status.GEANNULEERD, Integer.parseInt(request.getParameter("id")));
+                deliverys.boekInIfOrderIsGeleverd(Status.GEANNULEERD, Integer.parseInt(request.getParameter("id")));
             }
         }
         

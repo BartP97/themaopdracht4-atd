@@ -27,12 +27,13 @@ public class PersonService extends Service<Person, Long> {
 
     public boolean exists(String email){
 
-        Query q = getEntityManager().createQuery("SELECT COUNT(e.id) FROM Person e WHERE e.email = :email");
-        q.setParameter("email", email);
+        Query query = getEntityManager().createQuery("SELECT COUNT(e.id) FROM Person e WHERE e.email = :email");
+        query.setParameter("email", email);
 
-        List<Long> test = q.getResultList();
+        List<Long> test = query.getResultList();
+        Long expectedNumberOfResults = new Long(11);
 
-        return (test.get(0) == 1l);
+        return (test.get(0) == expectedNumberOfResults);
     }
 
     public Person getPerson(String email, String password) {
