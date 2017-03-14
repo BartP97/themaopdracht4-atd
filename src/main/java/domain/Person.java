@@ -198,7 +198,7 @@ public class Person implements Serializable, Validate{
                emailAddr.validate();
             } catch (AddressException ex) {
                result = false;
-            }
+                throw new RuntimeException(ex);}
 
             if(!result){
                 list.setError(new DomainError("emailError", "Moet valid email adres zijn"));

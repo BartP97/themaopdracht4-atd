@@ -103,7 +103,11 @@ public class Reservation implements Serializable, Validate {
         }
         
         if (arrivalDate.after(pickupDate)) {
-            list.setError(new DomainError("pickupError", "De vertrek datum moet na de aankomst datum zijn."));
+            try {
+                list.setError(new DomainError("pickupError", "De vertrek datum moet na de aankomst datum zijn."));
+            }catch(NullPointerException np){
+                throw new RuntimeException(np);
+            }
         }
         
         if(arrivalDate.before(Calendar.getInstance())) {

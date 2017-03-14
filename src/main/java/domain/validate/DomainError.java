@@ -23,7 +23,7 @@ public class DomainError {
     public boolean equals(Object o){
         return (o instanceof DomainError && ((DomainError)o).name.equalsIgnoreCase(name));
     }
-    
+    @Override
     public String toString(){
         return String.format("Error[%s]: %s", name, message);
     }

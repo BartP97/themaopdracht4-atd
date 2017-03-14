@@ -208,7 +208,6 @@ public class Task implements Serializable, Validate{
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Task)) {
             return false;
         }
@@ -234,12 +233,9 @@ public class Task implements Serializable, Validate{
         }
         
         //Als de status planned is moet de datum plan datum bekend zijn
-        if(status == Status.PLANNED){
-            
-            if(plannedFor == null){
+        if(status == Status.PLANNED && plannedFor == null){
+
                 list.setError(new DomainError("plannedForError", "Geef inplannings datum op"));
-            }
-            
         }
         
         //Als de status finished is dan moeten de uren en de 
@@ -249,7 +245,7 @@ public class Task implements Serializable, Validate{
                 list.setError(new DomainError("mechanicNoteError", "Geef feedback voor klant!"));
             }
             
-            if(hours < 0 || hours == 0.0){
+            if(hours < 0 || hours == 0.00){
                 list.setError(new DomainError("hoursError", "Vul je uren in!"));
             }
         }
